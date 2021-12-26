@@ -1,12 +1,12 @@
 [package]
-name = "template"
-version = "1.0.0"
+name = "goodbrother"
+version = "0.1.0"
 authors = ["stscoundrel / Sampo Silvennoinen"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/stscoundrel/rust-template"
+repository = "https://github.com/stscoundrel/goodbrother-rust"
 description = """
-Add definition here
+List open PRs in Github by user
 """
 edition = "2018"
 
