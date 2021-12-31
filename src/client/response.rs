@@ -1,11 +1,11 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct PullRequestUser {
     pub login: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct PullRequestResponse {
     pub id: i32,
     pub title: String,
@@ -15,7 +15,7 @@ pub struct PullRequestResponse {
 }
 
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct SearchResponse {
     pub total_count: i32,
     pub items: Vec<PullRequestResponse>,

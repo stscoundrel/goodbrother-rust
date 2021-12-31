@@ -6,9 +6,9 @@ use serde::{Deserialize, Serialize};
 ///
 #[derive(Serialize, Deserialize)]
 pub struct PullRequest {
-    pub id: String,
+    pub id: i32,
     pub name: String,
     pub link: String,
-    pub is_dependabot: boolean,
+    pub is_dependabot: bool,
     pub repository: String,
 }
