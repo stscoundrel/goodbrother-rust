@@ -31,7 +31,6 @@ pub fn get_pull_request_response(username: String, api_url: &str) -> Result<Sear
     let request_url = parse_request_url(&username, api_url);
     let response = get_response(request_url)?;
     let body = response.text()?;
-    println!("{}", body);
     
     let pull_requests = serde_json::from_str(&body)?;
 
