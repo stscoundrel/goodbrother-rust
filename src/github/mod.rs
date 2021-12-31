@@ -14,7 +14,7 @@ pub fn from_response(pr: &PullRequestResponse) -> PullRequest {
 }
 
 pub fn from_responses(prs: Vec<PullRequestResponse>) -> Vec<PullRequest> {
-    let  pull_requests: Vec<PullRequest> = prs.iter().map(|pr| from_response(pr)).collect();
+    let  pull_requests: Vec<PullRequest> = prs.iter().map(from_response).collect();
 
     pull_requests
 }
