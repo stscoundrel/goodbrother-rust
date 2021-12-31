@@ -2,7 +2,7 @@ use std::error::Error;
 use reqwest::blocking::{Client, Response};
 
 mod response;
-use response::SearchResponse;
+pub use response::{SearchResponse, PullRequestResponse, PullRequestUser};
 
 const GOODBROTHER_USER_AGENT: &str = "GOODBROTHER_RUST";
 
