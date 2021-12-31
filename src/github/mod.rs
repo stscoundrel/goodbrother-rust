@@ -4,13 +4,13 @@ use crate::client::PullRequestResponse;
 use pull_request::PullRequest;
 
 pub fn from_response(pr: &PullRequestResponse) -> PullRequest {
-    return PullRequest {
+    PullRequest {
         id: pr.id,
         name: pr.title.to_string(),
         link: pr.html_url.to_string(),
         is_dependabot: pr.user.login.contains("dependabot"),
         repository: pr.repository_url.to_string(),
-    };
+    }
 }
 
 pub fn from_responses(prs: Vec<PullRequestResponse>) -> Vec<PullRequest> {
