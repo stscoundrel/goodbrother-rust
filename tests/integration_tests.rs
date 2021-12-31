@@ -3,7 +3,7 @@ use goodbrother::{PullRequest, Repository};
 
 #[test]
 fn gets_pull_requets_by_user() {
-    let username = "stscoundrel".to_string();
+    let username = "stscoundrel";
     let result = get_pull_requests_by_user(username).unwrap();
 
     assert!(result.len() > 0);
@@ -23,7 +23,7 @@ fn gets_pull_requets_by_user() {
 
 #[test]
 fn gets_grouped_pull_requests_by_user() {
-    let username = "stscoundrel".to_string();
+    let username = "stscoundrel";
     let result = get_grouped_pull_requests_by_user(username).unwrap();
 
     assert!(result.len() > 0);

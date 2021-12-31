@@ -12,7 +12,7 @@ pub use github::{Repository, PullRequest};
 /// One list item per PR.
 ///
 ///
-pub fn get_pull_requests_by_user(username: String) -> Result<Vec<PullRequest>, Box<dyn Error>> {
+pub fn get_pull_requests_by_user(username: &str) -> Result<Vec<PullRequest>, Box<dyn Error>> {
     let pull_request_response = get_pull_request_response(username, API_URL)?;
 
     Ok(from_responses(pull_request_response.items))
@@ -23,7 +23,7 @@ pub fn get_pull_requests_by_user(username: String) -> Result<Vec<PullRequest>, B
 /// One list item per repository that has pull requests.
 ///
 ///
-pub fn get_grouped_pull_requests_by_user(username: String) -> Result<Vec<Repository>, Box<dyn Error>> {
+pub fn get_grouped_pull_requests_by_user(username: &str) -> Result<Vec<Repository>, Box<dyn Error>> {
     let pull_request_response = get_pull_request_response(username, API_URL)?;
     let pull_requests = from_responses(pull_request_response.items);
 
