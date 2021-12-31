@@ -41,7 +41,7 @@ mod tests {
             id: 1234,
             name: "First pr".to_string(),
             link: "https://github.com/stscoundrel/goodbrother-rust/pulls/666".to_string(),
-            repository: "https://github.com/stscoundrel/goodbrother-rust".to_string(),
+            repository: "stscoundrel/goodbrother-rust".to_string(),
             is_dependabot: false
         };
 
@@ -49,7 +49,7 @@ mod tests {
             id: 4321,
             name: "Second pr".to_string(),
             link: "https://github.com/stscoundrel/goodbrother-rust/pulls/667".to_string(),
-            repository: "https://github.com/stscoundrel/goodbrother-rust".to_string(),
+            repository: "stscoundrel/goodbrother-rust".to_string(),
             is_dependabot: false
         };
 
@@ -57,34 +57,46 @@ mod tests {
             id: 987654321,
             name: "Third pr".to_string(),
             link: "https://github.com/stscoundrel/goodbrother/pulls/668".to_string(),
-            repository: "https://github.com/stscoundrel/goodbrother".to_string(),
+            repository: "stscoundrel/goodbrother".to_string(),
             is_dependabot: true
         };
 
+        // Rust does not seem to quarantee order of items in vector.
         let pull_requests = vec![pull_request_1.clone(), pull_request_2.clone(), pull_request_3.clone()];
 
         let result = to_repository_summary(pull_requests);
 
         assert_eq!(result.len(), 2);
-        assert_eq!(result[0].pull_requests.len(), 2);
-        assert_eq!(result[1].pull_requests.len(), 1);
 
-        assert_eq!(result[0].pull_requests[0].id, pull_request_1.id);
-        assert_eq!(result[0].pull_requests[0].name, pull_request_1.name);
-        assert_eq!(result[0].pull_requests[0].link, pull_request_1.link);
-        assert_eq!(result[0].pull_requests[0].repository, pull_request_1.repository);
-        assert_eq!(result[0].pull_requests[0].is_dependabot, false);
+        let repo1: Vec<&Repository> = result
+            .iter()
+            .filter(|repo| repo.name.eq("stscoundrel/goodbrother-rust"))
+            .collect();
 
-        assert_eq!(result[0].pull_requests[1].id, pull_request_2.id);
-        assert_eq!(result[0].pull_requests[1].name, pull_request_2.name);
-        assert_eq!(result[0].pull_requests[1].link, pull_request_2.link);
-        assert_eq!(result[0].pull_requests[1].repository, pull_request_2.repository);
-        assert_eq!(result[0].pull_requests[1].is_dependabot, false);
+        let repo2: Vec<&Repository> = result
+            .iter()
+            .filter(|repo| repo.name.eq("stscoundrel/goodbrother"))
+            .collect();
 
-        assert_eq!(result[1].pull_requests[0].id, pull_request_3.id);
-        assert_eq!(result[1].pull_requests[0].name, pull_request_3.name);
-        assert_eq!(result[1].pull_requests[0].link, pull_request_3.link);
-        assert_eq!(result[1].pull_requests[0].repository, pull_request_3.repository);
-        assert_eq!(result[1].pull_requests[0].is_dependabot, true);
+        assert_eq!(repo1[0].pull_requests.len(), 2);
+        assert_eq!(repo2[0].pull_requests.len(), 1);
+
+        assert_eq!(repo1[0].pull_requests[0].id, pull_request_1.id);
+        assert_eq!(repo1[0].pull_requests[0].name, pull_request_1.name);
+        assert_eq!(repo1[0].pull_requests[0].link, pull_request_1.link);
+        assert_eq!(repo1[0].pull_requests[0].repository, pull_request_1.repository);
+        assert_eq!(repo1[0].pull_requests[0].is_dependabot, false);
+
+        assert_eq!(repo1[0].pull_requests[1].id, pull_request_2.id);
+        assert_eq!(repo1[0].pull_requests[1].name, pull_request_2.name);
+        assert_eq!(repo1[0].pull_requests[1].link, pull_request_2.link);
+        assert_eq!(repo1[0].pull_requests[1].repository, pull_request_2.repository);
+        assert_eq!(repo1[0].pull_requests[1].is_dependabot, false);
+
+        assert_eq!(repo2[0].pull_requests[0].id, pull_request_3.id);
+        assert_eq!(repo2[0].pull_requests[0].name, pull_request_3.name);
+        assert_eq!(repo2[0].pull_requests[0].link, pull_request_3.link);
+        assert_eq!(repo2[0].pull_requests[0].repository, pull_request_3.repository);
+        assert_eq!(repo2[0].pull_requests[0].is_dependabot, true);
     }
 }
