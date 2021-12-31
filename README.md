@@ -16,3 +16,44 @@ Add this to your `Cargo.toml`:
 [dependencies]
 goodbrother = "1.0.0"
 ```
+
+### Usage
+
+Listing all pull requests:
+
+```rust
+use goodbrother::{get_pull_requests_by_user, PullRequest};
+
+// Fetch list of open PRs by user.
+let username = "stscoundrel".to_string();
+
+// Returns Result, which may be error due to Github API connections.
+let result = get_pull_requests_by_user(username).unwrap();
+
+// Result is a vector of PullRequest structs. Eg:
+// {
+//     id: 1068208284,
+//     name: Bump eslint-config-airbnb-base from 14.2.1 to 15.0.0,
+//     link: https://github.com/stscoundrel/gatsby-source-plugin-zoega/pull/18,
+//     is_dependabot: true,
+//     repository: stscoundrel/gatsby-source-plugin-zoega,
+// }
+```
+
+Listing pull requests grouped by repos:
+
+```rust
+use goodbrother::{get_grouped_pull_requests_by_user, Repository};
+
+// Fetch list of open PRs by user.
+let username = "stscoundrel".to_string();
+
+// Returns Result, which may be error due to Github API connections.
+let result = get_grouped_pull_requests_by_user(username).unwrap();
+
+// Result is a vector of Repository structs. Eg:
+// {
+//     name: goodbrother
+//     pull_requests: PullRequest[],
+// }
+```
