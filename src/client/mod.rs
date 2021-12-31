@@ -4,6 +4,7 @@ use reqwest::blocking::{Client, Response};
 mod response;
 pub use response::{SearchResponse, PullRequestResponse, PullRequestUser};
 
+pub const API_URL: &str = "https://api.github.com";
 const GOODBROTHER_USER_AGENT: &str = "GOODBROTHER_RUST";
 
 fn parse_request_url(username: &str, api_url: &str) -> String {
