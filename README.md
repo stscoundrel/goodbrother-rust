@@ -25,7 +25,7 @@ Listing all pull requests:
 use goodbrother::{get_pull_requests_by_user, PullRequest};
 
 // Fetch list of open PRs by user.
-let username = "stscoundrel".to_string();
+let username = "stscoundrel";
 
 // Returns Result, which may be error due to Github API connections.
 let result = get_pull_requests_by_user(username).unwrap();
@@ -46,7 +46,7 @@ Listing pull requests grouped by repos:
 use goodbrother::{get_grouped_pull_requests_by_user, Repository};
 
 // Fetch list of open PRs by user.
-let username = "stscoundrel".to_string();
+let username = "stscoundrel";
 
 // Returns Result, which may be error due to Github API connections.
 let result = get_grouped_pull_requests_by_user(username).unwrap();

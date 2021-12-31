@@ -28,8 +28,8 @@ fn get_response(request_url: String) -> Result<Response, Box<dyn Error>> {
     Ok(response)
 }
 
-pub fn get_pull_request_response(username: String, api_url: &str) -> Result<SearchResponse, Box<dyn Error>> {
-    let request_url = parse_request_url(&username, api_url);
+pub fn get_pull_request_response(username: &str, api_url: &str) -> Result<SearchResponse, Box<dyn Error>> {
+    let request_url = parse_request_url(username, api_url);
     let response = get_response(request_url)?;
     let body = response.text()?;
     
@@ -94,7 +94,7 @@ mod tests {
                 .json_body(mock_response);
         });
 
-        let result = get_pull_request_response("stscoundrel".to_string(), &server.base_url()).unwrap();
+        let result = get_pull_request_response("stscoundrel", &server.base_url()).unwrap();
 
         // Assert JSON reply was parsed.
         assert_eq!(result.total_count, 2);
