@@ -1,14 +1,14 @@
 use std::error::Error;
 
-mod client;
+mod api;
 mod response;
 pub use response::{SearchResponse, PullRequestResponse, PullRequestUser};
 
 pub const API_URL: &str = "https://api.github.com";
 
 pub fn get_pull_request_response(username: &str, api_url: &str) -> Result<SearchResponse, Box<dyn Error>> {
-    let request_url = client::parse_request_url(username, api_url);
-    let response = client::get_response(request_url)?;
+    let request_url = api::parse_request_url(username, api_url);
+    let response = api::get_response(request_url)?;
     let body = response.text()?;
     
     let pull_requests = serde_json::from_str(&body)?;
