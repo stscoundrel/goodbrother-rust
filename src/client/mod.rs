@@ -1,36 +1,14 @@
 use std::error::Error;
-use reqwest::blocking::{Client, Response};
 
+mod api;
 mod response;
 pub use response::{SearchResponse, PullRequestResponse, PullRequestUser};
 
 pub const API_URL: &str = "https://api.github.com";
-const GOODBROTHER_USER_AGENT: &str = "GOODBROTHER_RUST";
-
-fn parse_request_url(username: &str, api_url: &str) -> String {
-    format!("{api}/search/issues?q=user:{user}+is:pr+state:open&per_page=100",
-        api = api_url,
-        user = username,)
-}
-
-fn get_client() -> Result<Client, Box<dyn Error>> {
-    let client = Client::builder()
-    .user_agent(GOODBROTHER_USER_AGENT)
-    .build()?;
-
-    Ok(client)
-}
-
-fn get_response(request_url: String) -> Result<Response, Box<dyn Error>> {
-    let client = get_client()?;
-    let response = client.get(request_url).send()?;
-
-    Ok(response)
-}
 
 pub fn get_pull_request_response(username: &str, api_url: &str) -> Result<SearchResponse, Box<dyn Error>> {
-    let request_url = parse_request_url(username, api_url);
-    let response = get_response(request_url)?;
+    let request_url = api::parse_request_url(username, api_url);
+    let response = api::get_response(request_url)?;
     let body = response.text()?;
     
     let pull_requests = serde_json::from_str(&body)?;
@@ -44,15 +22,6 @@ mod tests {
     use super::*;
     use httpmock::prelude::*;
     use serde_json::json;
-
-    #[test]
-    fn parses_request_url() {
-        let result1 = parse_request_url("stscoundrel", "https://api.github.com");
-        let result2 = parse_request_url("someoneelse", "https://api.github.com");
-
-        assert_eq!(result1, "https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100");
-        assert_eq!(result2, "https://api.github.com/search/issues?q=user:someoneelse+is:pr+state:open&per_page=100");
-    }
 
     #[test]
     fn gets_pull_request_response() {
