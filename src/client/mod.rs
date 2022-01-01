@@ -8,7 +8,7 @@ pub const API_URL: &str = "https://api.github.com";
 const GOODBROTHER_USER_AGENT: &str = "GOODBROTHER_RUST";
 
 fn parse_request_url(username: &str, api_url: &str) -> String {
-    format!("{api}/search/issues?q=user:{user}+is:pr+state:open",
+    format!("{api}/search/issues?q=user:{user}+is:pr+state:open&per_page=100",
         api = api_url,
         user = username,)
 }
@@ -50,8 +50,8 @@ mod tests {
         let result1 = parse_request_url("stscoundrel", "https://api.github.com");
         let result2 = parse_request_url("someoneelse", "https://api.github.com");
 
-        assert_eq!(result1, "https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open");
-        assert_eq!(result2, "https://api.github.com/search/issues?q=user:someoneelse+is:pr+state:open");
+        assert_eq!(result1, "https://api.github.com/search/issues?q=user:stscoundrel+is:pr+state:open&per_page=100");
+        assert_eq!(result2, "https://api.github.com/search/issues?q=user:someoneelse+is:pr+state:open&per_page=100");
     }
 
     #[test]
