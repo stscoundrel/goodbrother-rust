@@ -1,6 +1,6 @@
 [package]
 name = "goodbrother"
-version = "0.1.0"
+version = "0.5.0"
 authors = ["stscoundrel / Sampo Silvennoinen"]
 license = "MIT"
 readme = "README.md"
