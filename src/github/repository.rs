@@ -10,6 +10,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 pub struct Repository {
     pub name: String,
+    pub link: String,
+    pub count: usize,
     pub pull_requests: Vec<PullRequest>,
 }
 
@@ -20,13 +22,19 @@ pub fn to_repository_summary(prs: Vec<PullRequest>) -> Vec<Repository> {
         repositories.insert(pr.repository.to_string());
     }
 
-    repositories.iter().map(|repo| Repository {
-        name: repo.to_string(),
-        pull_requests: prs
+    repositories.iter().map(|repo| {
+        let repo_prs: Vec<PullRequest> = prs
             .clone()
             .into_iter()
             .filter(|pr| pr.repository.eq(repo))
-            .collect()
+            .collect();
+
+        Repository {
+            name: repo.to_string(),
+            link: "https://github.com/".to_string() + repo,
+            count: repo_prs.len(),
+            pull_requests: repo_prs
+        }
     }).collect()
 }
 
@@ -79,7 +87,12 @@ mod tests {
             .collect();
 
         assert_eq!(repo1[0].pull_requests.len(), 2);
+        assert_eq!(repo1[0].count, 2);
+        assert_eq!(repo1[0].link, "https://github.com/stscoundrel/goodbrother-rust");
+
         assert_eq!(repo2[0].pull_requests.len(), 1);
+        assert_eq!(repo2[0].count, 1);
+        assert_eq!(repo2[0].link, "https://github.com/stscoundrel/goodbrother");
 
         assert_eq!(repo1[0].pull_requests[0].id, pull_request_1.id);
         assert_eq!(repo1[0].pull_requests[0].name, pull_request_1.name);
