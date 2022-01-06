@@ -29,7 +29,7 @@ pub fn to_repository_summary(prs: Vec<PullRequest>) -> Vec<Repository> {
             .filter(|pr| pr.repository.eq(repo))
             .collect();
 
-        return Repository {
+        Repository {
             name: repo.to_string(),
             link: "https://github.com/".to_string() + repo,
             count: repo_prs.len(),
