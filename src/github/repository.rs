@@ -48,16 +48,16 @@ mod tests {
         let pull_request_1 = PullRequest {
             id: 1234,
             name: "First pr".to_string(),
-            link: "https://github.com/stscoundrel/goodbrother-rust/pulls/666".to_string(),
-            repository: "stscoundrel/goodbrother-rust".to_string(),
+            link: "https://github.com/stscoundrel/goodbrother-rs/pulls/666".to_string(),
+            repository: "stscoundrel/goodbrother-rs".to_string(),
             is_dependabot: false
         };
 
         let pull_request_2 = PullRequest {
             id: 4321,
             name: "Second pr".to_string(),
-            link: "https://github.com/stscoundrel/goodbrother-rust/pulls/667".to_string(),
-            repository: "stscoundrel/goodbrother-rust".to_string(),
+            link: "https://github.com/stscoundrel/goodbrother-rs/pulls/667".to_string(),
+            repository: "stscoundrel/goodbrother-rs".to_string(),
             is_dependabot: false
         };
 
@@ -78,7 +78,7 @@ mod tests {
 
         let repo1: Vec<&Repository> = result
             .iter()
-            .filter(|repo| repo.name.eq("stscoundrel/goodbrother-rust"))
+            .filter(|repo| repo.name.eq("stscoundrel/goodbrother-rs"))
             .collect();
 
         let repo2: Vec<&Repository> = result
@@ -88,7 +88,7 @@ mod tests {
 
         assert_eq!(repo1[0].pull_requests.len(), 2);
         assert_eq!(repo1[0].count, 2);
-        assert_eq!(repo1[0].link, "https://github.com/stscoundrel/goodbrother-rust");
+        assert_eq!(repo1[0].link, "https://github.com/stscoundrel/goodbrother-rs");
 
         assert_eq!(repo2[0].pull_requests.len(), 1);
         assert_eq!(repo2[0].count, 1);

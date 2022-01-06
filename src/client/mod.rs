@@ -36,8 +36,8 @@ mod tests {
                         "user": {
                             "login": "RustyMock",
                         },
-                        "html_url": "https://github.com/stscoundrel/goodbrother-rust/pulls/666",
-                        "repository_url": "https://github.com/stscoundrel/goodbrother-rust",
+                        "html_url": "https://github.com/stscoundrel/goodbrother-rs/pulls/666",
+                        "repository_url": "https://github.com/stscoundrel/goodbrother-rs",
                     },
                     {
                         "id": 654321,
@@ -45,8 +45,8 @@ mod tests {
                         "user": {
                             "login": "RustyMock",
                         },
-                        "html_url": "https://github.com/stscoundrel/goodbrother-rust/pulls/667",
-                        "repository_url": "https://github.com/stscoundrel/goodbrother-rust",
+                        "html_url": "https://github.com/stscoundrel/goodbrother-rs/pulls/667",
+                        "repository_url": "https://github.com/stscoundrel/goodbrother-rs",
                     }
                 ]
             }
@@ -70,8 +70,8 @@ mod tests {
         assert_eq!(result.items.len(), 2);
         assert_eq!(result.items[0].title, "Unit Test PR");
         assert_eq!(result.items[0].user.login, "RustyMock");
-        assert_eq!(result.items[0].html_url, "https://github.com/stscoundrel/goodbrother-rust/pulls/666");
-        assert_eq!(result.items[0].repository_url, "https://github.com/stscoundrel/goodbrother-rust");
+        assert_eq!(result.items[0].html_url, "https://github.com/stscoundrel/goodbrother-rs/pulls/666");
+        assert_eq!(result.items[0].repository_url, "https://github.com/stscoundrel/goodbrother-rs");
 
         // Assert it came from the mock server.
         github_mock.assert()
