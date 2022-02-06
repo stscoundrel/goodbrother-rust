@@ -75,8 +75,7 @@ mod tests {
         let server = MockServer::start();
         let github_mock = server.mock(|when, then| {
             when.method(GET)
-                .path("/search/issues")
-                .query_param("q", "user:stscoundrel+is:pr+state:open");
+                .path("/search/issues");
             then.status(200)
                 .header("content-type", "text/html")
                 .json_body(mock_response);
@@ -128,8 +127,7 @@ mod tests {
         let server = MockServer::start();
         let github_mock = server.mock(|when, then| {
             when.method(GET)
-                .path("/search/issues")
-                .query_param("q", "user:stscoundrel+is:pr+state:open");
+                .path("/search/issues");
             then.status(200)
                 .header("content-type", "text/html")
                 .json_body(mock_response);
