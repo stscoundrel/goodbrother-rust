@@ -10,11 +10,13 @@ Goodbrother is there to let me know if I still have some open.
 
 ### Install
 
-Add this to your `Cargo.toml`:
+`cargo add goodbrother`
+
+Or add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-goodbrother = "1.0.0"
+goodbrother = "1.1.0"
 ```
 
 ### Usage
